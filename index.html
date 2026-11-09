@@ -8158,5 +8158,51 @@ tr.bd td:first-child{box-shadow:inset -4px 0 0 #c62828}tr.wn td:first-child{box-
 })();
 
 </script>
-</body>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+
+import {
+  getFirestore,
+  doc,
+  setDoc,
+  getDoc,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAlvq2nKZzXqovl6jg8q24Jw8iOEbgKsyE",
+  authDomain: "sinox-eabce.firebaseapp.com",
+  projectId: "sinox-eabce",
+  storageBucket: "sinox-eabce.firebasestorage.app",
+  messagingSenderId: "114197031178",
+  appId: "1:114197031178:web:d001cda14ca3ab336ff2f3",
+  measurementId: "G-GGKSERYZS3"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+async function testFirebase() {
+  try {
+    const testRef = doc(db, "connection_test", "sinox_test");
+
+    await setDoc(testRef, {
+      message: "Sinox Firebase Connected",
+      createdAt: serverTimestamp()
+    });
+
+    const result = await getDoc(testRef);
+
+    console.log("Firebase SUCCESS:", result.data());
+
+  } catch (error) {
+    console.error("Firebase Error:", error);
+  }
+}
+
+testFirebase();
+</script>
+    
+  </body>
 </html>
